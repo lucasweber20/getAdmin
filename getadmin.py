@@ -8,6 +8,7 @@ from scripts.Requests import Requests
 parser = argparse.ArgumentParser()
 
 args = parser.add_argument("-l", "--list", help="Specify file with urls, example: -l urls.txt", type=str)
+args = parser.add_argument("-t", "--thread", help="Specify threads number, example: -t 5", default=1, type=int)
 args = parser.add_argument("-o", "--output", help="Specify output file, example: -o outputs.txt", type=str)
 
 args = parser.parse_args()
@@ -15,6 +16,7 @@ args = parser.parse_args()
 def main():
     # Flags
     file = args.list
+    thread = args.thread
     output = args.output
 
     urls = URL(file)
@@ -28,7 +30,7 @@ def main():
 
     # Requests
     req = Requests()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=thread) as executor:
         futures = [executor.submit(req.requests, url) for url in admin_urls]
         for future in concurrent.futures.as_completed(futures):
             result = future.result()
