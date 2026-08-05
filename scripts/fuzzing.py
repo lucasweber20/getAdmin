@@ -6,12 +6,16 @@ class Fuzzing:
     def __init__(self, url):
         self.url = url
 
-    def fuzzing(self, thread):
+    def fuzzing(self, thread, exclude_length):
         req = Requests()
         with concurrent.futures.ThreadPoolExecutor(max_workers=thread) as executor:
             futures = [executor.submit(req.requests, url) for url in self.url]
             for future in concurrent.futures.as_completed(futures):
                 result = future.result()
+                if exclude_length:
+                    result_exclude_length = req.exclude_length(result[2], exclude_length)
+                    if result_exclude_length == False:
+                        continue
                 if result[1] >= 200 and result[1] < 300:
                     print(f"{result[0]} -> \033[92m{result[1]}\033[00m Length: [{result[2]}]")
                 elif result[1] >= 300 and result[1] < 400:
