@@ -36,7 +36,6 @@ def main():
     if fuzz and file:
         parser = Parser(admin_urls)
         parsed_urls = parser.parser_url()
-
         fuzz = Fuzzing(parsed_urls)
         fuzz.fuzzing(thread)
         quit()
