@@ -3,6 +3,7 @@ import concurrent.futures
 from scripts.URL import URL
 from scripts.Search import Search
 from scripts.Requests import Requests
+from scripts.Parser import Parser
 
 
 parser = argparse.ArgumentParser()
@@ -29,6 +30,10 @@ def main():
     # Search admin path
     search = Search(url)
     admin_urls = search.search_admin()
+
+    # Fuzzing directories
+    if fuzz:
+        pass
 
     # Requests
     req = Requests()
