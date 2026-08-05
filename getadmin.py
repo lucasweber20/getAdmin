@@ -1,5 +1,6 @@
 import argparse
 from scripts.URL import URL
+from scripts.Search import Search
 
 
 parser = argparse.ArgumentParser()
@@ -19,6 +20,10 @@ def main():
     # Remove duplicates
     if file:
         url = urls.remove_duplicates()
+
+    # Search admin path
+    search = Search(url)
+    result = search.search_admin()
 
 if __name__ == "__main__":
     main()
