@@ -1,0 +1,17 @@
+/admin
+/admin.php
+/admin.html
+/wp-admin
+/wp-login.php
+/panel
+/panel.php
+/panel.html
+/painel
+/painel.php
+/painel.html
+/administrator
+/administrator.php
+/administrator.html
+/administrador
+/administrador.php
+/administrador.html
