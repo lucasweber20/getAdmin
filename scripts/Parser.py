@@ -23,4 +23,5 @@ class Parser:
             for path in read_wordlist:
                 parser_url = f"{scheme}://{hostname}{path}"
                 parsed_urls.append(parser_url)
-        return parsed_urls
+        result = list(dict.fromkeys(parsed_urls))
+        return result
