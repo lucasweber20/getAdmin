@@ -1,6 +1,8 @@
 import argparse
+import concurrent.futures
 from scripts.URL import URL
 from scripts.Search import Search
+from scripts.Requests import Requests
 
 
 parser = argparse.ArgumentParser()
@@ -20,7 +22,16 @@ def main():
 
     # Search admin path
     search = Search(url)
-    result = search.search_admin()
+    admin_urls = search.search_admin()
+
+    # Requests
+    req = Requests()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+        futures = [executor.submit(req.requests, url) for url in admin_urls]
+        for future in concurrent.futures.as_completed(futures):
+            result = future.result()
+            if result:
+                print(f"{result[0]} -> \033[92m{result[1]}\033[00m")
 
 if __name__ == "__main__":
     main()
