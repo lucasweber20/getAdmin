@@ -8,12 +8,14 @@ from scripts.Requests import Requests
 parser = argparse.ArgumentParser()
 
 args = parser.add_argument("-l", "--list", help="Specify file with urls, example: -l urls.txt", type=str)
+args = parser.add_argument("-o", "--output", help="Specify output file, example: -o outputs.txt", type=str)
 
 args = parser.parse_args()
 
 def main():
     # Flags
     file = args.list
+    output = args.output
 
     urls = URL(file)
 
@@ -38,6 +40,8 @@ def main():
                 print(f"{result[0]} -> \033[33m{result[1]}\033[00m")
             elif result[1] >= 500 and result[1] < 600:
                 print(f"{result[0]} -> \033[31m{result[1]}\033[00m")
+            if output:
+                write_file = open(output, "a").write(f"{result[0]} -> {result[1]}\n")
 
 if __name__ == "__main__":
     main()
