@@ -11,6 +11,7 @@ class Requests:
             req = requests.get(url, headers=headers, allow_redirects=False, timeout=6)
             url_request = req.url
             status_code = req.status_code
-            return url_request, status_code
+            length = len(req.content)
+            return url_request, status_code, length
         except:
             pass
