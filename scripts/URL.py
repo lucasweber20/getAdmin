@@ -1,8 +1,7 @@
 
 
 class URL:
-    def __init__(self, url, file):
-        self.url = url
+    def __init__(self, file):
         self.file = file
 
     def remove_duplicates(self):

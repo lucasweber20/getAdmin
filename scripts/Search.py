@@ -1,3 +1,4 @@
+from scripts.Parser import Parser
 
 
 class Search:
@@ -5,9 +6,12 @@ class Search:
         self.urls = urls
 
     def search_admin(self):
-        admin_list = []
+        result = []
         keyword = "admin"
         for url in self.urls:
-            if keyword in url:
-                admin_list.append(url)
-        return admin_list
+            parser = Parser(url)
+            parsed_url = parser.blacklist_ext()
+            if parsed_url:
+                if keyword in url:
+                    result.append(url)
+        return result
