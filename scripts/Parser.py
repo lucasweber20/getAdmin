@@ -1,5 +1,4 @@
 from os.path import splitext
-from urllib.parse import urlsplit
 
 
 class Parser:

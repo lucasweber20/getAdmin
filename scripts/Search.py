@@ -1,3 +1,5 @@
+import os
+from urllib.parse import urlsplit
 from scripts.Parser import Parser
 
 
@@ -12,7 +14,10 @@ class Search:
             parser = Parser(url)
             parsed_url = parser.blacklist_ext()
             if parsed_url:
-                for path in read_wordlist:
-                    if path in url:
-                        result.append(url)
+                path_url = urlsplit(url).path.split("/")
+                for path in path_url:
+                    format_path = f"/{path}"
+                    for path_word in read_wordlist:
+                        if path_word == format_path:
+                            result.append(url)
         return result
