@@ -5,6 +5,7 @@ from scripts.Search import Search
 from scripts.Requests import Requests
 from scripts.Parser import Parser
 from scripts.Fuzzing import Fuzzing
+from scripts.Crawling import Crawling
 
 
 parser = argparse.ArgumentParser()
@@ -50,16 +51,22 @@ def main():
         futures = [executor.submit(req.requests, url) for url in admin_urls]
         for future in concurrent.futures.as_completed(futures):
             result = future.result()
-            if result[1] >= 200 and result[1] < 300:
-                print(f"{result[0]} -> \033[92m{result[1]}\033[00m")
-            elif result[1] >= 300 and result[1] < 400:
-                print(f"{result[0]} -> \033[36m{result[1]}\033[00m")
-            elif result[1] >= 400 and result[1] < 500:
-                print(f"{result[0]} -> \033[33m{result[1]}\033[00m")
-            elif result[1] >= 500 and result[1] < 600:
-                print(f"{result[0]} -> \033[31m{result[1]}\033[00m")
-            if output:
-                write_file = open(output, "a").write(f"{result[0]} -> {result[1]}\n")
+            try:
+                if result[1] >= 200 and result[1] < 300:
+                    print(f"{result[0]} -> \033[92m{result[1]}\033[00m")
+                    if deep:
+                        crawl = Crawling(result[0])
+                        crawl.crawling()
+                elif result[1] >= 300 and result[1] < 400:
+                    print(f"{result[0]} -> \033[36m{result[1]}\033[00m")
+                elif result[1] >= 400 and result[1] < 500:
+                    print(f"{result[0]} -> \033[33m{result[1]}\033[00m")
+                elif result[1] >= 500 and result[1] < 600:
+                    print(f"{result[0]} -> \033[31m{result[1]}\033[00m")
+                if output:
+                    write_file = open(output, "a").write(f"{result[0]} -> {result[1]}\n")
+            except:
+                pass
 
 if __name__ == "__main__":
     main()
