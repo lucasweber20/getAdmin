@@ -12,7 +12,6 @@ parser = argparse.ArgumentParser()
 args = parser.add_argument("-l", "--list", help="Specify file with urls, example: -l urls.txt", type=str)
 args = parser.add_argument("-t", "--thread", help="Specify threads number, example: -t 5", default=1, type=int)
 args = parser.add_argument("-d", "--deep", help="Specify deep to crawling, example: --deep", action='store_true')
-args = parser.add_argument("-el", "--exclude_length", help="Specify length to ignore, example: -el 556 or --exclude_length 749,109", type=str)
 args = parser.add_argument("-o", "--output", help="Specify output file, example: -o outputs.txt", type=str)
 
 args = parser.parse_args()
@@ -22,7 +21,6 @@ def main():
     file = args.list
     thread = args.thread
     deep = args.deep
-    exclude_length = args.exclude_length
     output = args.output
 
     urls = URL(file)
