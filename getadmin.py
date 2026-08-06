@@ -4,7 +4,6 @@ from scripts.URL import URL
 from scripts.Search import Search
 from scripts.Requests import Requests
 from scripts.Parser import Parser
-from scripts.Fuzzing import Fuzzing
 from scripts.Crawling import Crawling
 
 
@@ -13,7 +12,6 @@ parser = argparse.ArgumentParser()
 args = parser.add_argument("-l", "--list", help="Specify file with urls, example: -l urls.txt", type=str)
 args = parser.add_argument("-t", "--thread", help="Specify threads number, example: -t 5", default=1, type=int)
 args = parser.add_argument("-d", "--deep", help="Specify deep to crawling, example: --deep", action='store_true')
-args = parser.add_argument("-f", help="Fuzzing directorie, example: -si", action='store_true')
 args = parser.add_argument("-el", "--exclude_length", help="Specify length to ignore, example: -el 556 or --exclude_length 749,109", type=str)
 args = parser.add_argument("-o", "--output", help="Specify output file, example: -o outputs.txt", type=str)
 
@@ -24,7 +22,6 @@ def main():
     file = args.list
     thread = args.thread
     deep = args.deep
-    fuzz = args.f
     exclude_length = args.exclude_length
     output = args.output
 
@@ -36,14 +33,6 @@ def main():
     # Search admin path
     search = Search(url)
     admin_urls = search.search_admin()
-
-    # Fuzzing directories
-    if fuzz and file:
-        parser = Parser(admin_urls)
-        parsed_urls = parser.parser_url()
-        fuzz = Fuzzing(parsed_urls)
-        fuzz.fuzzing(thread, exclude_length)
-        quit()
 
     # Requests
     req = Requests()
