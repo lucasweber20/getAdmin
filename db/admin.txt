@@ -1,5 +1,6 @@
 /adm
 /admin
+/admin/
 /admin.php
 /admin.html
 /admin.htm

@@ -1,4 +1,6 @@
 import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin, urlsplit
 
 
 class Crawling:
@@ -10,10 +12,13 @@ class Crawling:
         try:
             print("Crawling...")
             req = requests.get(self.url, headers=headers, allow_redirects=False, timeout=5).text
+            soup = BeautifulSoup(req, 'html.parser')
             read_wordlist = open("./db/admin.txt", encoding='utf-8').read().splitlines()
-            for path in read_wordlist:
-                if path in req:
-                    print(f"Found: {path}")
+            for word_path in read_wordlist:
+                for path in soup.find_all('a'):
+                    path_href = urlsplit(path['href']).path
+                    if word_path == path_href:
+                        print(f"Found: {word_path}")
             return True
         except:
             pass
