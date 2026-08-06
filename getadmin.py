@@ -38,9 +38,6 @@ def main():
         futures = [executor.submit(req.requests, url) for url in admin_urls]
         for future in concurrent.futures.as_completed(futures):
             result = future.result()
-            if deep:
-                crawl = Crawling(result[0])
-                crawl.crawling()
             try:
                 if result[1] >= 200 and result[1] < 300:
                     print(f"{result[0]} -> \033[92m{result[1]}\033[00m")
@@ -50,6 +47,9 @@ def main():
                     print(f"{result[0]} -> \033[33m{result[1]}\033[00m")
                 elif result[1] >= 500 and result[1] < 600:
                     print(f"{result[0]} -> \033[31m{result[1]}\033[00m")
+                if deep:
+                    crawl = Crawling(result[0])
+                    crawl.crawling()
                 if output:
                     write_file = open(output, "a").write(f"{result[0]} -> {result[1]}\n")
             except:
