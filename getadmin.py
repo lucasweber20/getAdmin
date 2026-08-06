@@ -10,6 +10,7 @@ from scripts.fuzzing import Fuzzing
 parser = argparse.ArgumentParser()
 
 args = parser.add_argument("-l", "--list", help="Specify file with urls, example: -l urls.txt", type=str)
+args = parser.add_argument("-d", "--deep", help="Specify deep to scrapping, example: --deep", action='store_true' type=str)
 args = parser.add_argument("-t", "--thread", help="Specify threads number, example: -t 5", default=1, type=int)
 args = parser.add_argument("-f", help="Fuzzing directorie, example: -si", action='store_true')
 args = parser.add_argument("-el", "--exclude_length", help="Specify length to ignore, example: -el 556 or --exclude_length 749,109", type=str)
@@ -20,6 +21,7 @@ args = parser.parse_args()
 def main():
     # Flags
     file = args.list
+    deep = args.deep
     thread = args.thread
     fuzz = args.f
     exclude_length = args.exclude_length
