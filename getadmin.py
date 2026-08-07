@@ -47,11 +47,17 @@ def main():
                     print(f"{result[0]} [\033[33m{result[1]}\033[00m]")
                 elif result[1] >= 500 and result[1] < 600:
                     print(f"{result[0]} [\033[31m{result[1]}\033[00m]")
+                    
                 if deep:
                     crawl = Crawling(result[2], result[0])
-                    crawl.crawling()
-                if output and result[1] < 300:
-                    write_file = open(output, "a").write(f"{result[0]} -> {result[1]}\n")
+                    result = crawl.crawling()
+                    print("===== \033[92mCrawling\033[00m =====")
+                    for url in result:
+                        print(f"Found: \033[92m{url}\033[00m")
+                    print("="*20)
+
+                if output and result[1] < 400:
+                    write_file = open(output, "a").write(f"{result[0]} [{result[1]}]\n")
             except:
                 pass
 
