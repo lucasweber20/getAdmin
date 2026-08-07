@@ -1,7 +1,6 @@
-import requests
 import warnings
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urlsplit
 
 
 class Crawling:

@@ -1,4 +1,3 @@
-import os
 from urllib.parse import urlsplit
 from scripts.Parser import Parser
 
