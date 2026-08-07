@@ -16,12 +16,3 @@ class Requests:
             return url_request, status_code, body, location
         except:
             pass
-
-    def exclude_length(self, length, exclude_length):
-        if exclude_length == str(length):
-            return False
-        elif "," in exclude_length:
-            for lengths in exclude_length.split(','):
-                if lengths == str(length):
-                    return False
-        
