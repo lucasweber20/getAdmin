@@ -50,7 +50,7 @@ def main():
                 if deep:
                     crawl = Crawling(result[2], result[0])
                     crawl.crawling()
-                if output:
+                if output and result[1] < 400:
                     write_file = open(output, "a").write(f"{result[0]} -> {result[1]}\n")
             except:
                 pass

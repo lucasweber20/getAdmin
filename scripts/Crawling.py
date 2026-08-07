@@ -23,7 +23,9 @@ class Crawling:
                     for attr in attrs:
                         path_href = urlsplit(path[attr]).path
                         if word_path == path_href:
-                            print(f"Found: {self.url}")
+                            print("===== \033[92mCrawling\033[00m =====")
+                            print(f"Found: \033[92m{self.url}\033[00m")
+                            print("="*20)
             return True
         except:
             pass
