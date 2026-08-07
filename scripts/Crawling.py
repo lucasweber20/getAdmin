@@ -10,7 +10,6 @@ class Crawling:
         self.url = url
 
     def crawling(self):
-        urls = []
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"}
         try:
             print("Crawling...")
@@ -24,7 +23,9 @@ class Crawling:
                     for attr in attrs:
                         path_href = urlsplit(path[attr]).path
                         if word_path == path_href:
-                            urls.append(self.url)
-            return urls
+                            print("===== \033[92mCrawling\033[00m =====")
+                            print(f"Found: \033[92m{self.url}\033[00m")
+                            print("="*20)
+            return True
         except:
             pass
