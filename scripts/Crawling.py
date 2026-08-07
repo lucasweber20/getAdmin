@@ -5,18 +5,17 @@ from urllib.parse import urljoin, urlsplit
 
 
 class Crawling:
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, body):
+        self.body = body
 
     def crawling(self):
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"}
         try:
             print("Crawling...")
             warnings.filterwarnings('ignore', category=XMLParsedAsHTMLWarning)
-            req = requests.get(self.url, headers=headers, allow_redirects=False, timeout=5).text
-            tags = ["a", "link", "form"]
-            attrs = ["href", "action"]
-            soup = BeautifulSoup(req, 'html.parser')
+            tags = ["a", "link"]
+            attrs = ["href"]
+            soup = BeautifulSoup(self.body, 'html.parser')
             read_wordlist = open("./db/admin.txt", encoding='utf-8').read().splitlines()
             for word_path in read_wordlist:
                 for path in soup.find_all('a'):
