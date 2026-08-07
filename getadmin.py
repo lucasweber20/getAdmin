@@ -48,7 +48,7 @@ def main():
                 elif result[1] >= 500 and result[1] < 600:
                     print(f"{result[0]} -> \033[31m{result[1]}\033[00m")
                 if deep:
-                    crawl = Crawling(result[2])
+                    crawl = Crawling(result[2], result[0])
                     crawl.crawling()
                 if output:
                     write_file = open(output, "a").write(f"{result[0]} -> {result[1]}\n")

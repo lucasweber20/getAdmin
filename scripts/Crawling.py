@@ -5,8 +5,9 @@ from urllib.parse import urljoin, urlsplit
 
 
 class Crawling:
-    def __init__(self, body):
+    def __init__(self, body, url):
         self.body = body
+        self.url = url
 
     def crawling(self):
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"}
@@ -22,7 +23,7 @@ class Crawling:
                     for attr in attrs:
                         path_href = urlsplit(path[attr]).path
                         if word_path == path_href:
-                            print(f"Found: {word_path}")
+                            print(f"Found: {self.url}")
             return True
         except:
             pass
