@@ -42,7 +42,10 @@ def main():
                 if result[1] >= 200 and result[1] < 300:
                     print(f"{result[0]} [\033[92m{result[1]}\033[00m]")
                 elif result[1] >= 300 and result[1] < 400:
-                    print(f"{result[0]} [\033[36m{result[1]}\033[00m]")
+                    search = Search(result[3])
+                    location = search.search_location()
+                    if location:
+                        print(f"{result[3]} [\033[92m200\033[00m]")
                 elif result[1] >= 400 and result[1] < 500:
                     print(f"{result[0]} [\033[33m{result[1]}\033[00m]")
                 elif result[1] >= 500 and result[1] < 600:

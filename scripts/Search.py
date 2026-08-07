@@ -20,3 +20,9 @@ class Search:
                         if path_word == format_path:
                             result.append(url)
         return result
+
+    def search_location(self):
+        read_wordlist = open("./db/admin.txt", encoding='utf-8').read().splitlines()
+        for path_word in read_wordlist:
+            if path_word in self.urls:
+                return True
