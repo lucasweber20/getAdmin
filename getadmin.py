@@ -20,7 +20,6 @@ def main():
     # Flags
     file = args.list
     thread = args.thread
-    nobrute = args.nobrute
     deep = args.deep
     output = args.output
 
@@ -42,10 +41,8 @@ def main():
             try:
                 if result[1] >= 200 and result[1] < 300:
                     print(f"{result[0]} [\033[92m{result[1]}\033[00m]")
-                    if nobrute:
-                        continue
                 elif result[1] >= 300 and result[1] < 400:
-                    print(f"{result[0]} [\033[36m{result[1]}\033[00m] -> \033[92m{result[3]}\033[00m")
+                    print(f"{result[0]} [\033[36m{result[1]}\033[00m]")
                 elif result[1] >= 400 and result[1] < 500:
                     print(f"{result[0]} [\033[33m{result[1]}\033[00m]")
                 elif result[1] >= 500 and result[1] < 600:
@@ -57,7 +54,6 @@ def main():
                     print("===== \033[92mCrawling\033[00m =====")
                     for url in result:
                         print(f"Found: \033[92m{url}\033[00m")
-                    print("="*20)
 
                 if output and result[1] < 400:
                     write_file = open(output, "a").write(f"{result[0]} [{result[1]}]\n")
