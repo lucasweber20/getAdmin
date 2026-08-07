@@ -12,7 +12,8 @@ class Requests:
             url_request = req.url
             status_code = req.status_code
             body = req.text
-            return url_request, status_code, body
+            location = req.headers.get("Location").strip("'")
+            return url_request, status_code, body, location
         except:
             pass
 
