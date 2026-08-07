@@ -18,10 +18,11 @@ class Crawling:
             soup = BeautifulSoup(self.body, 'html.parser')
             read_wordlist = open("./db/admin.txt", encoding='utf-8').read().splitlines()
             for word_path in read_wordlist:
-                for path in soup.find_all('a'):
-                    path_href = urlsplit(path['href']).path
-                    if word_path == path_href:
-                        print(f"Found: {word_path}")
+                for path in soup.find_all(tags):
+                    for attr in attrs:
+                        path_href = urlsplit(path[attr]).path
+                        if word_path == path_href:
+                            print(f"Found: {word_path}")
             return True
         except:
             pass
