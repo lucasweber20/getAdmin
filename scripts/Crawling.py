@@ -14,7 +14,7 @@ class Crawling:
         try:
             print("Crawling...")
             warnings.filterwarnings('ignore', category=XMLParsedAsHTMLWarning)
-            tags = ["a", "link"]
+            tags = ["a", "link", "area", "base"]
             attrs = ["href"]
             soup = BeautifulSoup(self.body, 'html.parser')
             read_wordlist = open("./db/admin.txt", encoding='utf-8').read().splitlines()
